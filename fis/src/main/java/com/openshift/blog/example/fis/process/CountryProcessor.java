@@ -71,7 +71,7 @@ public class CountryProcessor implements Processor {
 		int selector = getBoundedRandomNumber(countries.size());
 
 		CountryModel model = new CountryModel();
-		model.setName(countries.get(selector));
+		model.setName(countries.get(selector).trim());
 
 		in.setBody(model);
 
