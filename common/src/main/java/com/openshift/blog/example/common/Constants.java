@@ -24,5 +24,6 @@ package com.openshift.blog.example.common;
  */
 public interface Constants {
 
-	static final String COUNTRY_SERVICE_NAME = "COUNTRY_SERVICE_NAME";
+	static final String COUNTRY_SERVICE_HOST = "COUNTRY_SERVICE_SERVICE_HOST";
+	static final String COUNTRY_SERVICE_PORT = "COUNTRY_SERVICE_SERVICE_PORT";
 }

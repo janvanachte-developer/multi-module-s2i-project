@@ -20,6 +20,7 @@ import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.ws.rs.core.Response;
 
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
@@ -32,22 +33,22 @@ import com.openshift.blog.example.common.Constants;
 import com.openshift.blog.example.common.model.CountryModel;
 
 /**
- * A simple CDI service to query a RESTful endpoint and get a random country name back
+ * A simple CDI service to query a RESTful endpoint and get a random country
+ * name back
  *
  * @author benjaminholmes
  *
  */
 @SessionScoped
 public class CountryServiceClient implements Serializable {
-	
+
 	private static final Logger LOG = LoggerFactory.getLogger(CountryServiceClient.class);
 
-	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 17182478623782L;
-	
+
 	private ResteasyClient client;
 
 	/**
@@ -57,35 +58,50 @@ public class CountryServiceClient implements Serializable {
 	 */
 	public String getCountry() {
 		LOG.debug("Entering getCountry()");
-		
-		String url = System.getenv(Constants.COUNTRY_SERVICE_NAME);
-		
+
+		String url = this.getServiceURL();
+
 		String result = null;
-		
-		if (client != null && (url != null && !url.isEmpty()))
-		{
+
+		if (client != null && (url != null && !url.isEmpty())) {
 			LOG.info("Calling web service...");
-			
+
 			ResteasyWebTarget target = client.target(url);
 			Response response = target.request().get();
 			CountryModel model = response.readEntity(CountryModel.class);
 			result = model.getName();
-			
+
 			LOG.info("...web service responded");
 		}
-		
+
 		LOG.debug("Leaving getCountry()");
-		
+
 		return result;
-		
+
 	}
 
 	@PostConstruct
 	protected void postConstruct() {
 		LOG.debug("Entering postConstruct()");
-		
+
 		client = new ResteasyClientBuilder().build();
-		
+
 		LOG.debug("Leaving postConstruct()");
+	}
+
+	private String getServiceURL() {
+		StringBuilder sb = new StringBuilder();
+
+		String host = System.getenv(Constants.COUNTRY_SERVICE_HOST);
+		String port = System.getenv(Constants.COUNTRY_SERVICE_PORT);
+
+		sb.append("http://");
+		sb.append(host);
+		sb.append(":");
+		sb.append(port);
+		sb.append("/");
+		sb.append("country");
+
+		return sb.toString();
 	}
 }
