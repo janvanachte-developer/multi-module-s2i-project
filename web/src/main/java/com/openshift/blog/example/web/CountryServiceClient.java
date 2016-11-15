@@ -34,7 +34,7 @@ import com.openshift.blog.example.common.model.CountryModel;
 /**
  * A simple CDI service to query a RESTful endpoint and get a random country name back
  *
- * @author Ben Holmes
+ * @author benjaminholmes
  *
  */
 @SessionScoped

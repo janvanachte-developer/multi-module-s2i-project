@@ -34,11 +34,10 @@ import javax.servlet.http.HttpServletResponse;
  * <p>
  * The servlet is registered and mapped to /Country using the
  * {@linkplain WebServlet
- * 
  * @HttpServlet}. The {@link CountryServiceClient} is injected by CDI.
  *                </p>
  *
- * @author Ben Holmes
+ * @author benjaminholmes
  *
  */
 @SuppressWarnings("serial")

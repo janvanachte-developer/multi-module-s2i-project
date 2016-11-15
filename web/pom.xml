@@ -25,6 +25,18 @@
 	<name>Red Hat :: OpenShift Blog Example :: Web</name>
 	<description>Web module for the OpenShift Maven multi-module example projct</description>
 
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.jboss.bom</groupId>
+				<artifactId>jboss-eap-javaee7-with-tools</artifactId>
+				<version>${eap.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<dependencies>
 
 		<!-- Import the common module -->
