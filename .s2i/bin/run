@@ -6,6 +6,4 @@ set -eo pipefail
 
 S2I_SCRIPT_DIR="/usr/local/s2i"
 
-source $S2I_SCRIPT_DIR/s2i-setup
-
 exec $S2I_SCRIPT_DIR/run
