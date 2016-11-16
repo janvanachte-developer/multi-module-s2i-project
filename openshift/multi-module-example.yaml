@@ -9,11 +9,7 @@ parameters:
   name: SOURCE_REPOSITORY
   value: https://github.com/benemon/multi-module-s2i-project
   required: true
-- description: Nexus URL - currently ignored
-  name: NEXUS_URL
-  value: http://nexus-cicd.rhel-cdk.10.1.2.2.xip.io
-  required: false
-- description: Service Data Directory
+- description: Country Service data directory
   name: DATA_DIRECTORY
   value: /deployments/data
   required: true
@@ -60,8 +56,8 @@ objects:
     - imageChange: {}
       type: ImageChange
     - type: ConfigChange
-  status:
-    lastVersion: 0
+  status: {}
+    
 - apiVersion: v1
   kind: BuildConfig
   metadata:
@@ -101,15 +97,14 @@ objects:
     - imageChange: {}
       type: ImageChange
     - type: ConfigChange
-  status:
-    lastVersion: 0
+  status: {}
+  
 - apiVersion: v1
   kind: DeploymentConfig
   metadata:
     annotations:
       openshift.io/generated-by: OpenShiftWebConsole
     creationTimestamp: null
-    generation: 8
     labels:
       app: country-service
       delete: blog
@@ -172,18 +167,14 @@ objects:
           name: country-service:latest
       type: ImageChange
     - type: ConfigChange
-  status:
-    availableReplicas: 1
-    observedGeneration: 8
-    replicas: 1
-    updatedReplicas: 1
+  status: {}
+  
 - apiVersion: v1
   kind: DeploymentConfig
   metadata:
     annotations:
       openshift.io/generated-by: OpenShiftWebConsole
     creationTimestamp: null
-    generation: 5
     labels:
       app: country-web
       delete: blog
@@ -210,7 +201,7 @@ objects:
           deploymentconfig: country-web
       spec:
         containers:
-          image: country-web
+        - image: country-web:latest
           imagePullPolicy: Always
           name: country-web
           ports:
@@ -242,20 +233,17 @@ objects:
         from:
           kind: ImageStreamTag
           name: country-web:latest
+          namespace: countries
       type: ImageChange
     - type: ConfigChange
-  status:
-    availableReplicas: 1
-    observedGeneration: 5
-    replicas: 1
-    updatedReplicas: 1
+  status: {}
+  
 - apiVersion: v1
   kind: ImageStream
   metadata:
     annotations:
       openshift.io/generated-by: OpenShiftWebConsole
     creationTimestamp: null
-    generation: 1
     labels:
       app: country-service
       delete: blog
@@ -269,15 +257,14 @@ objects:
       generation: null
       importPolicy: {}
       name: latest
-  status:
-    dockerImageRepository: ""
+  status: {}
+    
 - apiVersion: v1
   kind: ImageStream
   metadata:
     annotations:
       openshift.io/generated-by: OpenShiftWebConsole
     creationTimestamp: null
-    generation: 1
     labels:
       app: country-web
       delete: blog
@@ -291,8 +278,8 @@ objects:
       generation: null
       importPolicy: {}
       name: latest
-  status:
-    dockerImageRepository: ""
+  status: {}
+    
 - apiVersion: v1
   kind: Service
   metadata:
@@ -319,6 +306,7 @@ objects:
     type: ClusterIP
   status:
     loadBalancer: {}
+    
 - apiVersion: v1
   kind: Service
   metadata:
@@ -349,6 +337,7 @@ objects:
     type: ClusterIP
   status:
     loadBalancer: {}
+    
 - apiVersion: v1
   kind: Route
   metadata:

@@ -1,0 +1,76 @@
+apiVersion: v1
+kind: Template
+metadata:
+  creationTimestamp: null
+  name: multi-module-example
+objects:
+- apiVersion: v1
+  kind: DeploymentConfig
+  metadata:
+    annotations:
+      openshift.io/generated-by: OpenShiftWebConsole
+    creationTimestamp: null
+    generation: 2
+    labels:
+      app: country-web
+      delete: blog
+    name: country-web
+  spec:
+    replicas: 1
+    selector:
+      deploymentconfig: country-web
+    strategy:
+      resources: {}
+      rollingParams:
+        intervalSeconds: 1
+        maxSurge: 25%
+        maxUnavailable: 25%
+        timeoutSeconds: 600
+        updatePeriodSeconds: 1
+      type: Rolling
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: country-web
+          delete: blog
+          deploymentconfig: country-web
+      spec:
+        containers:
+        - image: country-web:latest
+          imagePullPolicy: Always
+          name: country-web
+          ports:
+          - containerPort: 8080
+            protocol: TCP
+          - containerPort: 8443
+            protocol: TCP
+          - containerPort: 8778
+            name: jolokia
+            protocol: TCP
+          resources:
+            limits:
+              cpu: 500m
+              memory: 384Mi
+            requests:
+              cpu: 250m
+              memory: 128Mi
+          terminationMessagePath: /dev/termination-log
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+    test: false
+    triggers:
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+        - country-web
+        from:
+          kind: ImageStreamTag
+          name: country-web:latest
+          namespace: countries
+      type: ImageChange
+    - type: ConfigChange
+  status:
+    observedGeneration: 2
