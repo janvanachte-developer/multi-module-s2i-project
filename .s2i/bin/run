@@ -2,7 +2,7 @@
 set -eo pipefail
 
 # Dummy run script. Seems that for some reason, if we just copy the script in, it's not picked up at runtime.
-# If we have this here, then overwrite it with the module run script, everything works. Go figure.
+# If we have this here, then overwrite it with the module run script, everything works.
 
 S2I_SCRIPT_DIR="/usr/local/s2i"
 
