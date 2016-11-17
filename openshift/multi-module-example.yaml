@@ -212,13 +212,6 @@ objects:
           - containerPort: 8778
             name: jolokia
             protocol: TCP
-          resources:
-            limits:
-              cpu: 500m
-              memory: 384Mi
-            requests:
-              cpu: 250m
-              memory: 128Mi
           terminationMessagePath: /dev/termination-log
         dnsPolicy: ClusterFirst
         restartPolicy: Always
