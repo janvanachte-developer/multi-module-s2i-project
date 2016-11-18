@@ -9,6 +9,10 @@ parameters:
   name: SOURCE_REPOSITORY
   value: https://github.com/benemon/multi-module-s2i-project
   required: true
+- description: Git Source reference
+  name: SOURCE_REF
+  value: b1.0
+  required: true
 - description: Country Service data directory
   name: DATA_DIRECTORY
   value: /deployments/data
@@ -35,7 +39,7 @@ objects:
     runPolicy: Serial
     source:
       git:
-        ref: master
+        ref: ${SOURCE_REF}
         uri: ${SOURCE_REPOSITORY}
       type: Git
     strategy:
@@ -78,7 +82,7 @@ objects:
     runPolicy: Serial
     source:
       git:
-        ref: master
+        ref: ${SOURCE_REF}
         uri: ${SOURCE_REPOSITORY}
       type: Git
     strategy:
