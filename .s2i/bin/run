@@ -8,7 +8,7 @@ S2I_SCRIPT_DIR="/usr/local/s2i"
 
 if [ -f /deployments/scripts/$MODULE_DIR/run ]; then
 
-   echo "Custom run script configured. Using this instead of the default."
+   echo "Using module-specific run script"
    exec /deployments/scripts/$MODULE_DIR/run
 
 else
