@@ -4,10 +4,12 @@ set -eo pipefail
 # Master run script. Due to the decision tree in the Dockerfile, if we just copy the script in, it's not picked up at runtime.
 # If we have this here, then use it to call the module run script, everything works.
 
-if [ -f /opt/$MODULE_DIR/run ]; then
+S2I_SCRIPT_DIR="/usr/local/s2i"
+
+if [ -f /deployments/scripts/$MODULE_DIR/run ]; then
 
    echo "Custom run script configured. Using this instead of the default."
-   exec $S2I_SOURCE_DIR/$MODULE_DIR/.s2i/bin/run
+   exec /deployments/scripts/$MODULE_DIR/run
 
 else
 
