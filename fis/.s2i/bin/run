@@ -1,10 +1,6 @@
 #!/bin/bash
 set -eo pipefail
 
-echo
-echo "Using module-specific S2I script"
-echo
-
 if [ x"$DATA_DIRECTORY" != "x" ]; then
     mkdir -p $DATA_DIRECTORY
     cp /tmp/src/fis/src/main/resources/data/* $DATA_DIRECTORY
