@@ -29,8 +29,8 @@ if [ x"$MODULE_DIR" != "x" ]; then
 
    else
 
-       echo "Using default assemble script"
-       $S2I_SCRIPT_DIR/assemble
+       echo "Using default run script"
+       $S2I_SCRIPT_DIR/run
   fi
 
 fi
