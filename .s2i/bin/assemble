@@ -12,7 +12,7 @@ function check_run {
 
        mkdir -p /deployments/scripts/$MODULE_DIR/
 
-       cp $S2I_SOURCE_DIR/$MODULE_DIR/.s2i/bin/run /opt/$MODULE_DIR/
+       cp $S2I_SOURCE_DIR/$MODULE_DIR/.s2i/bin/run /deployments/scripts/$MODULE_DIR/
 
    else
 
