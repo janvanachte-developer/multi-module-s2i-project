@@ -36,7 +36,7 @@ function check_assemble {
 
 function default_assemble {
 
-  echo "No module-specific S2I scripts found. Continuing with defaults."
+  echo "Using default assemble script"
   $S2I_SCRIPT_DIR/assemble
 
 }
