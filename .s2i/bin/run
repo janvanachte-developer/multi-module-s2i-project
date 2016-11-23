@@ -1,8 +1,9 @@
 #!/bin/bash
 set -eo pipefail
 
-# Master run script. Due to the decision tree in the Dockerfile, if we just copy the script in, it's not picked up at runtime.
-# If we have this here, then use it to call the module run script, everything works.
+# Master run script. 
+# Due to the decision tree in the Dockerfile, if we just copy the module script in, it's not recognised at runtime.
+# If we have this here, then use it to bootstrap the module run script, everything works.
 
 S2I_SCRIPT_DIR="/usr/local/s2i"
 
