@@ -230,7 +230,6 @@ objects:
         from:
           kind: ImageStreamTag
           name: country-web:latest
-          namespace: countries
       type: ImageChange
     - type: ConfigChange
   status: {}
