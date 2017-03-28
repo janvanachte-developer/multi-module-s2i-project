@@ -53,7 +53,7 @@ objects:
           value: fis
         from:
           kind: ImageStreamTag
-          name: fis-java-openshift:latest
+          name: fis-java-openshift:1.0
           namespace: openshift
       type: Source
     triggers:
